@@ -1,0 +1,147 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+html,
+body {
+  height: 100%;
+  overflow: hidden;
+  font-family: "Montserrat", sans-serif;
+}
+.container0 {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.title {
+  margin-top: 1%;
+  height: 12%;
+  width: 90%;
+  /* margin: 4vh 4vw 4vh 4vw; */
+  color: black;
+  /* border-radius: 10px; */
+}
+.title h1 {
+  font-size: 1.5rem;
+}
+
+.titleContent {
+  display: flex;
+  flex-direction: column;
+  /* align-items: center; */
+  justify-content: center;
+  height: 100%;
+}
+#map {
+  position: relative;
+  width: 90%;
+  height: 46%;
+  border-radius: 25px;
+
+  z-index: 2;
+}
+
+.directionsControl {
+  position: fixed;
+  border-radius: 25px;
+  background: rgba(0, 0, 0, 0.1);
+  margin: 1vw 1vw;
+  height: 36%;
+}
+.container {
+  width: 90%;
+  height: 29%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  background: #dbe2e5e1;
+  text-align: center;
+  border-radius: 25px;
+  margin-bottom: 1%;
+}
+
+a {
+  position: relative;
+  display: inline-block;
+  padding: 6px 12px;
+  text-decoration: none;
+  letter-spacing: 2px;
+  color: #000;
+  overflow: hidden;
+  background: white;
+  margin: 1px;
+  border-radius: 7px;
+  border: #b3afac 1px solid;
+}
+a:hover {
+  background: #dbe2e5e1;
+  border: rgb(145, 145, 145) 1px solid;
+  transition: 1.2s;
+}
+
+#flightAppt {
+  border-radius: 5px;
+  border: #b3afac 1px solid;
+  padding: 3px;
+}
+
+.red {
+  color: rgb(255, 0, 0);
+}
+
+@media (max-width: 600px) {
+  .title h1 {
+    font-size: 1.2rem;
+  }
+  p {
+    font-size: 0.8rem;
+  }
+  .title {
+    height: 15%;
+  }
+  #map {
+    height: 43%;
+  }
+  .container {
+    height: 32%;
+  }
+
+  .directionsControl {
+    height: 33%;
+    width: 70%;
+  }
+}
+
+@media (max-width: 350px) {
+  .title h1 {
+    font-size: 1.1rem;
+  }
+  p {
+    font-size: 0.65rem;
+  }
+  .title {
+    height: 18%;
+  }
+  #map {
+    height: 40%;
+  }
+  .container {
+    height: 32%;
+  }
+
+  .directionsControl {
+    height: 33%;
+    width: 70%;
+  }
+}
+
+@media (max-width: 290px) {
+  .directionsControl {
+    width: 59%;
+  }
+}

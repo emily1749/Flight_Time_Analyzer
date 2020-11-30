@@ -1,0 +1,50 @@
+<div class="container0">
+
+    <div class="title">
+        <div class="titleContent">
+            <h1>Flight Time Analyzer</h1>
+            <p>
+                This app analyzes the optimal time to leave to make your flight by evaluating traffic and security wait
+                times.
+                Enter your starting address, the US airport you are departing from, and the flight boarding time. We add
+                30 minutes for leeway so you won't miss your flight.
+            </p>
+        </div>
+
+    </div>
+    <div id="map"></div>
+    <div class="container">
+        <div class="enterFlight">
+            <div>
+                <p>What time is your flight boarding? </p><br />
+            </div>
+            <div><label for="flightAppt"></label>
+                <input type="time" id="flightAppt" name="flightAppt" min="0:00" max="24:00" required /><br /><br />
+            </div>
+            <div>
+
+                <a href="#" class="button" id="getResult">
+                    Get Result!
+                </a> <br /> <br />
+                <!-- <button type="button" id="getResult">Get result time!</button><br/><br/> -->
+            </div>
+            <div id="display-result">
+                <!-- textresulthere -->
+            </div>
+            <!-- </div> -->
+        </div>
+        <div class="result"></div>
+
+        <br />
+    </div>
+
+</div>
+
+
+<script type="text/javascript">
+    let airport = "";
+    let timeToAirport = "";
+</script>
+<script src="js/client.js"></script>
+
+</body>
