@@ -1,19 +1,19 @@
-const express = require("express");
-const request = require("request");
-const cheerio = require("cheerio");
-const WaitTimes = require("../models/WaitTimes");
+const express = require('express');
+const request = require('request');
+const cheerio = require('cheerio');
+const WaitTimes = require('../models/WaitTimes');
 const router = express.Router();
 
 const app = express();
 
-router.get("/", (req, res) => {
-  res.send("On the wait times page");
+router.get('/', (req, res) => {
+  res.json({ status: 'success', message: 'On the Wait Times page' });
 });
 
-router.get("/:airport", async (req, res) => {
+router.get('/:airport', async (req, res) => {
   airport = req.params.airport;
   airport = airport.toLowerCase();
-  let url = "https://www.tsawaittimes.com/security-wait-times/" + airport;
+  let url = 'https://www.tsawaittimes.com/security-wait-times/' + airport;
 
   //First check if airport is already in the database
   WaitTimes.countDocuments({ airport: airport }, async (err, count) => {
@@ -38,11 +38,11 @@ router.get("/:airport", async (req, res) => {
           async function createJSON() {
             var self = this;
             self.thejson = {};
-            $(".jumbotron div").each(function(index, value) {
-              var key = $("div>div", this)
+            $('.jumbotron div').each(function(index, value) {
+              var key = $('div>div', this)
                 .text()
                 .match(/\d\s?..{5,}(a|p)m/);
-              val = $("div>div>div", this)
+              val = $('div>div>div', this)
                 .text()
                 .match(/\d/);
 
@@ -61,7 +61,7 @@ router.get("/:airport", async (req, res) => {
             let resultArray = [];
 
             for (let i = 0; i < 24; i++) {
-              resultArray[i] = "N/A";
+              resultArray[i] = 'N/A';
             }
             // console.log("counter: " + counter);
             for (let i = counter, j = 0; i < 24; i++, j++) {
@@ -70,8 +70,9 @@ router.get("/:airport", async (req, res) => {
             }
 
             //Check if result is valid, i.e. an improper airport code was input. Return message to enter valid code.
-            if (resultArray[23] === "N/A") {
-              res.send({ msg: "Please enter valid airport three letter code" });
+            if (resultArray[23] === 'N/A') {
+              res.status(401);
+              res.send({ msg: 'Please enter valid airport three letter code' });
               return;
             }
 

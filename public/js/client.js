@@ -1,15 +1,15 @@
 //Initialize map
-L.mapquest.key = "KEY";
-let map = L.mapquest.map("map", {
+L.mapquest.key = 'KEY';
+let map = L.mapquest.map('map', {
   center: [39.8283, -98.5795],
-  layers: L.mapquest.tileLayer("map"),
+  layers: L.mapquest.tileLayer('map'),
   zoom: 4,
   zoomControl: false,
 });
 
 let directionsControl = L.mapquest
   .directionsControl({
-    className: "directionsControl",
+    className: 'directionsControl',
     directions: {
       options: {
         timeOverage: 25,
@@ -18,23 +18,23 @@ let directionsControl = L.mapquest
     },
     directionsLayer: {
       startMarker: {
-        title: "Drag to change location",
+        title: 'Drag to change location',
         draggable: true,
-        icon: "marker-start",
+        icon: 'marker-start',
         iconOptions: {
-          size: "sm",
+          size: 'sm',
         },
       },
       endMarker: {
         draggable: true,
-        title: "Drag to change location",
-        icon: "marker-end",
+        title: 'Drag to change location',
+        icon: 'marker-end',
         iconOptions: {
-          size: "sm",
+          size: 'sm',
         },
       },
       viaMarker: {
-        title: "Drag to change route",
+        title: 'Drag to change route',
       },
       routeRibbon: {
         showTraffic: true,
@@ -49,21 +49,21 @@ let directionsControl = L.mapquest
       compactResults: true,
       disabled: false,
       location: {},
-      placeholderText: "Starting point or click on the map...",
+      placeholderText: 'Starting point or click on the map...',
       geolocation: {
         enabled: true,
       },
-      clearTitle: "Remove starting point",
+      clearTitle: 'Remove starting point',
     },
     endInput: {
       compactResults: true,
       disabled: false,
       location: {},
-      placeholderText: "Destination",
+      placeholderText: 'Destination',
       geolocation: {
         enabled: true,
       },
-      clearTitle: "Remove this destination",
+      clearTitle: 'Remove this destination',
     },
     addDestinationButton: {
       enabled: true,
@@ -90,11 +90,11 @@ let directionsControl = L.mapquest
   })
   .addTo(map);
 
-L.mapquest.key = "FofZ9naiaa4m9XRoUHWOqqws3pnaTqFn";
+L.mapquest.key = 'FofZ9naiaa4m9XRoUHWOqqws3pnaTqFn';
 
 var options = {
-  q: "Denver, CO",
-  collection: "address,adminArea,airport,poi",
+  q: 'Denver, CO',
+  collection: 'address,adminArea,airport,poi',
 };
 
 L.mapquest.searchAhead.prediction(options, searchAheadCallback);
@@ -108,63 +108,63 @@ map.addControl(L.mapquest.locatorControl());
 settings = {
   // Receives input time, will convert it to total minutes
   convertTimeToMinutes: time => {
-    timeResult = time.split(":");
+    timeResult = time.split(':');
     // timeHour = parseInt(timeResult[0]);
     return Math.floor(parseInt(timeResult[0]) * 60 + parseInt(timeResult[1]));
   },
 
   getTimeHour: time => {
-    timeResult = time.split(":");
+    timeResult = time.split(':');
     timeHour = parseInt(timeResult[0]);
     return timeHour;
   },
 
   // Receives minutes, will convert it to a time
   convertMinutesToTime: minutes => {
-    let timeMinutes = "";
+    let timeMinutes = '';
     // If the minutes is negative, it's the previous day. Add 24 hours to it
     if (minutes < 0) {
       minutes = minutes + 24 * 60;
     }
     //If the minutes is less than 10, need to add the 0 placeholder
     if (parseInt(minutes) % 60 < 10) {
-      timeMinutes = "0" + String(parseInt(minutes) % 60);
-      return String(Math.floor(parseInt(minutes) / 60)) + ":" + timeMinutes;
+      timeMinutes = '0' + String(parseInt(minutes) % 60);
+      return String(Math.floor(parseInt(minutes) / 60)) + ':' + timeMinutes;
     }
     //Return the time
     else {
       return (
-        Math.floor(parseInt(minutes) / 60) + ":" + (parseInt(minutes) % 60)
+        Math.floor(parseInt(minutes) / 60) + ':' + (parseInt(minutes) % 60)
       );
     }
   },
 
   // Convert time from 24 hours to AM/PM
   convertTime: time => {
-    let [hours, minutes] = time.split(":");
+    let [hours, minutes] = time.split(':');
     if (parseInt(hours) > 12) {
-      return String(parseInt(hours) - 12) + ":" + minutes + " PM";
+      return String(parseInt(hours) - 12) + ':' + minutes + ' PM';
     }
     if (parseInt(hours) < 1) {
-      return String(parseInt(hours) + 12) + ":" + minutes + "PM";
+      return String(parseInt(hours) + 12) + ':' + minutes + 'PM';
     } else {
-      return time + " AM";
+      return time + ' AM';
     }
   },
 };
 
 // Display final result
-document.getElementById("getResult").addEventListener("click", () => {
-  let airport = "";
-  let stringTimeToAirport = "";
+document.getElementById('getResult').addEventListener('click', () => {
+  let airport = '';
+  let stringTimeToAirport = '';
   let minutesToAirport = 0;
   let securityCheckMinutes = 0;
   let timeHour = 0;
   let fetchResult = [];
-  let fetchUrl = "";
-  let flightTime = "";
+  let fetchUrl = '';
+  let flightTime = '';
 
-  let displayResult = document.getElementById("display-result");
+  let displayResult = document.getElementById('display-result');
 
   // Use Regular Expressions to retrieve input airport from map
   airport = directionsControl._inputControls[1]._input.value.match(
@@ -174,8 +174,8 @@ document.getElementById("getResult").addEventListener("click", () => {
   // Check if airport was valid input
   if (!airport) {
     displayResult.textContent =
-      "Please enter a valid US airport as the destination";
-    displayResult.classList.add("red");
+      'Please enter a valid US airport as the destination';
+    displayResult.classList.add('red');
   }
   airport = airport[0].match(/[A-Z]{3,3}/);
 
@@ -198,12 +198,12 @@ document.getElementById("getResult").addEventListener("click", () => {
   }
 
   // Get flight boarding time
-  flightTime = document.getElementById("flightAppt").value;
+  flightTime = document.getElementById('flightAppt').value;
 
   // Check if flight boarding time was valid input
   if (!flightTime) {
-    displayResult.textContent = "Please enter a valid time for flight boarding";
-    displayResult.classList.add("red");
+    displayResult.textContent = 'Please enter a valid time for flight boarding';
+    displayResult.classList.add('red');
   }
 
   // Convert flight time to minutes and get the hour of the flight
@@ -211,7 +211,7 @@ document.getElementById("getResult").addEventListener("click", () => {
   timeHour = settings.getTimeHour(flightTime);
 
   // Fetch airport wait times data
-  fetchUrl = String("http://localhost:5000/waitTimes/" + airport);
+  fetchUrl = String('http://localhost:5000/waitTimes/' + airport);
   fetch(fetchUrl)
     .then(result => {
       return result.json();
@@ -224,7 +224,7 @@ document.getElementById("getResult").addEventListener("click", () => {
       for (let i = 1; i < 24; i++) {
         // Check that data for input is not N/A
         // If N/A, use first available time from data
-        if (securityCheckMinutes != "N/A") {
+        if (securityCheckMinutes != 'N/A') {
           break;
         } else {
           securityCheckMinutes = Object.values(fetchResult)[timeHour + 2 + i];
@@ -244,16 +244,16 @@ document.getElementById("getResult").addEventListener("click", () => {
       // Check that the minutes to airport was valid. If not, needs valid address
 
       if (!minutesToAirport) {
-        displayResult.textContent = "Please enter a valid starting address";
-        displayResult.classList.add("red");
+        displayResult.textContent = 'Please enter a valid starting address';
+        displayResult.classList.add('red');
       }
       if (minutesToAirport && flightTime && airport) {
         // Display result
-        displayResult.classList.remove("red");
+        displayResult.classList.remove('red');
         displayResult.textContent =
-          "Security will take " +
+          'Security will take ' +
           securityCheckMinutes +
-          " minutes. To make your flight, leave at: " +
+          ' minutes. To make your flight, leave at: ' +
           settings.convertTime(resultTime);
       }
     })
